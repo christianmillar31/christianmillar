@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function SpaceBackground() {
   // Cosmic blue background and animated stars
@@ -213,6 +213,7 @@ function Contact() {
 
 function Navbar() {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
@@ -222,7 +223,8 @@ function Navbar() {
   ];
   return (
     <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-black/80 via-blue-900/80 to-sky-900/80 backdrop-blur-md shadow-lg flex justify-center py-4">
-      <ul className="flex gap-8 text-lg font-semibold text-sky-100">
+      {/* Desktop nav */}
+      <ul className="hidden md:flex gap-8 text-lg font-semibold text-sky-100">
         {navLinks.map((link) => (
           <li key={link.to}>
             <Link
@@ -234,6 +236,44 @@ function Navbar() {
           </li>
         ))}
       </ul>
+      {/* Mobile hamburger */}
+      <div className="md:hidden flex items-center w-full justify-between px-4">
+        <div className="text-xl font-bold text-sky-100">Christian Millar</div>
+        <button
+          className="text-sky-100 focus:outline-none"
+          aria-label="Open menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-30 bg-black/80 flex flex-col items-center justify-center md:hidden" onClick={() => setMenuOpen(false)}>
+          <button
+            className="absolute top-6 right-6 text-sky-100 text-3xl"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            &times;
+          </button>
+          <ul className="flex flex-col gap-8 text-2xl font-semibold text-sky-100">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className={`hover:text-white transition ${location.pathname === link.to ? 'text-white underline underline-offset-8' : ''}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
