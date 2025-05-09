@@ -161,7 +161,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto md:min-h-[500px]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto md:w-[400px] md:h-[500px]"
             >
               <span className="text-5xl mb-4">{icons[0]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white text-center">Autonomous Food Delivery Robot</h3>
@@ -179,7 +179,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-gradient-to-br from-sky-900 via-blue-800 to-black/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border-2 border-sky-400/40 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:min-h-[500px]"
+              className="bg-gradient-to-br from-sky-900 via-blue-800 to-black/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border-2 border-sky-400/40 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:w-[400px] md:h-[500px]"
             >
               <span className="text-6xl mb-4">{icons[3]}</span>
               <h3 className="text-2xl font-bold mb-2 text-sky-200 text-center">Autonomous Food Delivery Robot<br/>Demo & Report</h3>
@@ -213,7 +213,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:min-h-[500px]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:w-[400px] md:h-[500px]"
             >
               <span className="text-5xl mb-4">{icons[2]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">Robotic Arm Manipulator</h3>
@@ -230,7 +230,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto md:min-h-[500px]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto md:w-[400px] md:h-[500px]"
             >
               <span className="text-5xl mb-4">{icons[1]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white text-center">Custom Built RC Submersible</h3>
@@ -249,7 +249,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:min-h-[500px]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:w-[400px] md:h-[500px]"
             >
               <span className="text-5xl mb-4">🎵</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">SongBattle (iOS App)</h3>
@@ -274,7 +274,7 @@ function Projects() {
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:min-h-[500px]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 md:w-[400px] md:h-[500px]"
             >
               <span className="text-5xl mb-4">🌐</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">CNVP Website</h3>
