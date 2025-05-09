@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function SpaceBackground() {
   // Cosmic blue background and animated stars
@@ -30,28 +31,71 @@ function SpaceBackground() {
   );
 }
 
+// Typewriter effect for hero text
+function Typewriter({ texts, speed = 80, pause = 1200 }) {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  useEffect(() => {
+    if (subIndex === texts[index].length + 1 && !deleting) {
+      setTimeout(() => setDeleting(true), pause);
+      return;
+    }
+    if (deleting && subIndex === 0) {
+      setDeleting(false);
+      setIndex((prev) => (prev + 1) % texts.length);
+      return;
+    }
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (deleting ? -1 : 1));
+    }, deleting ? speed / 2 : speed);
+    return () => clearTimeout(timeout);
+  }, [subIndex, deleting, index, texts, speed, pause]);
+  return (
+    <span>
+      {texts[index].substring(0, subIndex)}
+      <span className="animate-pulse">|</span>
+    </span>
+  );
+}
+
 function Home() {
   return (
-    <main className="relative z-10 flex flex-col items-center px-6 py-32 min-h-screen justify-center">
+    <motion.main
+      className="relative z-10 flex flex-col items-center px-6 py-32 min-h-screen justify-center"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.6 }}
+    >
       <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-lg mb-6 animate-fade-in text-white">
         Christian Millar
       </h1>
       <h2 className="text-2xl md:text-3xl font-light mb-8 text-sky-200 animate-fade-in delay-200 text-center">
-        Mechanical Engineering Graduate from UCLA
+        <Typewriter texts={["Engineer.", "Builder.", "Problem-solver."]} />
       </h2>
+      <p className="text-lg md:text-xl text-sky-100 mb-6 text-center max-w-2xl animate-fade-in delay-300">
+        I build robots, write code, and chase problems worth solving — here's what I've made.
+      </p>
       <Link
         to="/about"
         className="mt-4 px-8 py-3 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300 animate-fade-in delay-400"
       >
         View My Work
       </Link>
-    </main>
+    </motion.main>
   );
 }
 
 function About() {
   return (
-    <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32">
+    <motion.section
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
       {/* Hero section with image, subtitle, and passions */}
       <div className="flex flex-col items-center mb-10">
         {/* Profile image placeholder (replace src with your image if desired) */}
@@ -88,7 +132,7 @@ function About() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -101,13 +145,24 @@ function Projects() {
     "📄", // Report/Video
   ];
   return (
-    <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32" id="projects">
+    <motion.section
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32"
+      id="projects"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
       <h2 className="text-4xl font-bold mb-12 text-white">Projects</h2>
       <div className="w-full max-w-5xl flex flex-col gap-10">
         {/* Top row: Robot and Submersible side by side */}
-        <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center flex-wrap">
           <div className="flex-1 flex justify-end">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 hover:scale-105 transition-transform duration-300 flex flex-col items-center w-full max-w-md">
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
               <span className="text-5xl mb-4">{icons[0]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">Autonomous Food Delivery Robot</h3>
               <p className="text-sky-100 mb-2">Team Lead, UCLA (2024 – Present)</p>
@@ -117,12 +172,16 @@ function Projects() {
                 <li>Electronics design: wiring, soldering, software integration</li>
                 <li>Robot detects objects, follows routes, delivers food, and returns home</li>
               </ul>
-            </div>
+            </motion.div>
           </div>
           {/* SWAPPED: Demo & Report Box now in top row */}
           <div className="flex-1 flex justify-start mt-10 md:mt-0">
-            <div className="bg-gradient-to-br from-sky-900 via-blue-800 to-black/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border-2 border-sky-400/40 hover:scale-105 transition-transform duration-300 flex flex-col items-center w-full max-w-md">
-              <span className="text-6xl mb-4 animate-bounce">{icons[3]}</span>
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-gradient-to-br from-sky-900 via-blue-800 to-black/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border-2 border-sky-400/40 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
+              <span className="text-6xl mb-4">{icons[3]}</span>
               <h3 className="text-2xl font-bold mb-2 text-sky-200 text-center">Autonomous Food Delivery Robot<br/>Demo & Report</h3>
               <a
                 href="/Project%20Delivery%20Report.pdf"
@@ -130,7 +189,7 @@ function Projects() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                📄 View Full Project Report (PDF)
+                📄 View Project Design Report (PDF)
               </a>
               <div className="w-full aspect-w-16 aspect-h-9 mt-4 rounded-lg overflow-hidden shadow-lg">
                 <iframe
@@ -145,13 +204,17 @@ function Projects() {
               <div className="mt-4 text-sky-100 text-center text-sm">
                 <strong>See the robot in action and read the full engineering report!</strong>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         {/* Bottom row: Robotic Arm and RC Submersible side by side on desktop, stacked on mobile */}
         <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center mt-10">
           <div className="flex-1 flex justify-end">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 hover:scale-105 transition-transform duration-300 flex flex-col items-center w-full max-w-md">
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
               <span className="text-5xl mb-4">{icons[2]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">Robotic Arm Manipulator</h3>
               <p className="text-sky-100 mb-2">Lead, UCLA (Summer 2023)</p>
@@ -160,11 +223,15 @@ function Projects() {
                 <li>Calculated torque and stress for safe, reliable movement</li>
                 <li>Produced engineering drawings and CAD for manufacturing</li>
               </ul>
-            </div>
+            </motion.div>
           </div>
           {/* SWAPPED: RC Submersible now in bottom row */}
           <div className="flex-1 flex justify-start mt-10 md:mt-0">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 hover:scale-105 transition-transform duration-300 flex flex-col items-center w-full max-w-md">
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
               <span className="text-5xl mb-4">{icons[1]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white">Custom Built RC Submersible</h3>
               <p className="text-sky-100 mb-2">Personal Project (2025 – Present)</p>
@@ -172,11 +239,63 @@ function Projects() {
                 <li>Designing and fabricating a remotely operated underwater vehicle (ROV)</li>
                 <li>Arduino-based electronics, IR remote, custom propulsion, buoyancy control</li>
               </ul>
-            </div>
+            </motion.div>
+          </div>
+        </div>
+        {/* Add SongBattle and CNVP project cards below the existing project rows */}
+        <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center mt-10">
+          {/* SongBattle Project Card */}
+          <div className="flex-1 flex justify-end">
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
+              <span className="text-5xl mb-4">🎵</span>
+              <h3 className="text-2xl font-semibold mb-2 text-white">SongBattle (iOS App)</h3>
+              <p className="text-sky-100 mb-2">Work in Progress (2025 – Present)</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left">
+                <li>Shazam-style music guessing game for teams</li>
+                <li>Modern SwiftUI interface, Spotify integration</li>
+                <li>Fair song selection, scoring, and team management</li>
+              </ul>
+              <a
+                href="https://github.com/christianmillar31/SongBattle"
+                className="text-sky-300 underline hover:text-sky-100 mt-2 mb-4 block"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </a>
+            </motion.div>
+          </div>
+          {/* CNVP Project Card */}
+          <div className="flex-1 flex justify-start mt-10 md:mt-0">
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+            >
+              <span className="text-5xl mb-4">🌐</span>
+              <h3 className="text-2xl font-semibold mb-2 text-white">CNVP Website</h3>
+              <p className="text-sky-100 mb-2">2025 – Present</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left">
+                <li>Website for CNVP</li>
+                <li>Modern web technologies and design</li>
+              </ul>
+              <a
+                href="https://github.com/christianmillar31"
+                className="text-sky-300 underline hover:text-sky-100 mt-2 mb-4 block"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -195,25 +314,50 @@ function Contact() {
       <h2 className="text-4xl font-bold mb-4 text-white">Contact</h2>
       <p className="text-sky-100 mb-2">Email: <a href="mailto:christianmillar31@gmail.com" className="underline hover:text-sky-300">christianmillar31@gmail.com</a></p>
       <p className="text-sky-100 mb-2">Phone: <a href="tel:8058077790" className="underline hover:text-sky-300">(805) 807-7790</a></p>
-      <p className="text-sky-200 mb-2">Thousand Oaks, CA</p>
-      <p className="mt-4">
-        <a
+      <p className="text-sky-200 mb-2">Thousand Oaks, CA || Los Angeles, CA</p>
+      <div className="flex flex-col items-center gap-2 mt-6">
+        <motion.a
           href="https://instagram.com/christian.millar"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 font-semibold text-lg underline"
+          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
+          whileHover={{ scale: 1.1 }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="currentColor" opacity="0.1"/><path d="M16.75 3H7.25C5.17893 3 3.5 4.67893 3.5 6.75V17.25C3.5 19.3211 5.17893 21 7.25 21H16.75C18.8211 21 20.5 19.3211 20.5 17.25V6.75C20.5 4.67893 18.8211 3 16.75 3Z" stroke="currentColor" strokeWidth="1.5"/><circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth="1.5"/><circle cx="17.25" cy="6.75" r="0.75" fill="currentColor"/></svg>
           @christian.millar
-        </a>
-      </p>
+        </motion.a>
+        <motion.a
+          href="https://github.com/christianmillar31"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.3 2 1.9 6.3 1.9 12c0 4.4 2.9 8.1 6.8 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1-1-1.3-1-1.3-.8-.6.1-.6.1-.6.9.1 1.4.9 1.4.9.8 1.4 2.1 1 2.6.8.1-.6.3-1 .5-1.2-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-2 1-2.7-.1-.2-.4-1.1.1-2.2 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3.8 0 1.7.1 2.5.3 1.9-1.3 2.7-1 2.7-1 .5 1.1.2 2 .1 2.2.6.7 1 1.6 1 2.7 0 3.7-2.3 4.6-4.5 4.8.3.3.6.8.6 1.7v2.5c0 .3.2.6.7.5 3.9-1.3 6.8-5 6.8-9.4C22.1 6.3 17.7 2 12 2z"/></svg>
+          @christianmillar31
+        </motion.a>
+        <motion.a
+          href="https://letterboxd.com/christianmillar/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
+          whileHover={{ scale: 1.1 }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="12" fill="#393939"/>
+            <circle cx="8.5" cy="12" r="2" fill="#FF8000"/>
+            <circle cx="12" cy="12" r="2" fill="#7ED321"/>
+            <circle cx="15.5" cy="12" r="2" fill="#4A90E2"/>
+          </svg>
+          @christianmillar
+        </motion.a>
+      </div>
     </section>
   );
 }
 
 function Navbar() {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
@@ -222,11 +366,10 @@ function Navbar() {
     { to: '/contact', label: 'Contact' },
   ];
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-black/80 via-blue-900/80 to-sky-900/80 backdrop-blur-md shadow-lg flex justify-center py-4">
-      {/* Desktop nav */}
-      <ul className="hidden md:flex gap-8 text-lg font-semibold text-sky-100">
+    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-black/80 via-blue-900/80 to-sky-900/80 backdrop-blur-md shadow-lg flex justify-center py-3 px-2">
+      <ul className="flex flex-nowrap gap-3 sm:gap-6 md:gap-8 text-base sm:text-lg font-semibold text-sky-100 overflow-x-auto scrollbar-hide">
         {navLinks.map((link) => (
-          <li key={link.to}>
+          <li key={link.to} className="shrink-0">
             <Link
               to={link.to}
               className={`hover:text-white transition ${location.pathname === link.to ? 'text-white underline underline-offset-8' : ''}`}
@@ -236,45 +379,34 @@ function Navbar() {
           </li>
         ))}
       </ul>
-      {/* Mobile hamburger */}
-      <div className="md:hidden flex items-center w-full justify-between px-4">
-        <div className="text-xl font-bold text-sky-100">Christian Millar</div>
-        <button
-          className="text-sky-100 focus:outline-none"
-          aria-label="Open menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-      {/* Mobile menu overlay */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-30 bg-black/80 flex flex-col items-center justify-center md:hidden" onClick={() => setMenuOpen(false)}>
-          <button
-            className="absolute top-6 right-6 text-sky-100 text-3xl"
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-          >
-            &times;
-          </button>
-          <ul className="flex flex-col gap-8 text-2xl font-semibold text-sky-100">
-            {navLinks.map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className={`hover:text-white transition ${location.pathname === link.to ? 'text-white underline underline-offset-8' : ''}`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </nav>
+  );
+}
+
+// Back-to-top button
+function BackToTopButton() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-500 text-white rounded-full p-4 shadow-lg focus:outline-none"
+          aria-label="Back to top"
+        >
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" /></svg>
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -289,14 +421,17 @@ function App() {
     <div className="relative min-h-screen font-sans">
       <SpaceBackground />
       <Navbar />
-      <div className="pt-24">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+      <BackToTopButton />
+      <div className="pt-6 md:pt-8">
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </AnimatePresence>
       </div>
     </div>
   );
