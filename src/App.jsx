@@ -156,8 +156,8 @@ function Projects() {
       <h2 className="text-4xl font-bold mb-12 text-white">Projects</h2>
       <div className="w-full max-w-5xl flex flex-col gap-10">
         {/* Top row: Robot and Submersible side by side */}
-        <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center flex-wrap">
-          <div className="flex-1 flex justify-end mx-auto">
+        <div className="flex flex-col items-center justify-center md:flex-row gap-10 md:gap-8 md:justify-center flex-wrap">
+          <div className="flex-1 flex justify-center md:justify-end mx-auto">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -175,7 +175,7 @@ function Projects() {
             </motion.div>
           </div>
           {/* SWAPPED: Demo & Report Box now in top row */}
-          <div className="flex-1 flex justify-start mt-10 md:mt-0">
+          <div className="flex-1 flex justify-center md:justify-start mt-10 md:mt-0">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -209,7 +209,7 @@ function Projects() {
         </div>
         {/* Bottom row: Robotic Arm and RC Submersible side by side on desktop, stacked on mobile */}
         <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center mt-10">
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex justify-center md:justify-end">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -226,7 +226,7 @@ function Projects() {
             </motion.div>
           </div>
           {/* SWAPPED: RC Submersible now in bottom row */}
-          <div className="flex-1 flex justify-start mt-10 md:mt-0 mx-auto">
+          <div className="flex-1 flex justify-center md:justify-start mt-10 md:mt-0 mx-auto">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -245,7 +245,7 @@ function Projects() {
         {/* Add SongBattle and CNVP project cards below the existing project rows */}
         <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center mt-10">
           {/* SongBattle Project Card */}
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex justify-center md:justify-end">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -270,7 +270,7 @@ function Projects() {
             </motion.div>
           </div>
           {/* CNVP Project Card */}
-          <div className="flex-1 flex justify-start mt-10 md:mt-0">
+          <div className="flex-1 flex justify-center md:justify-start mt-10 md:mt-0">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
