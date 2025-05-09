@@ -78,7 +78,7 @@ function Home() {
         I build robots, write code, and chase problems worth solving — here's what I've made.
       </p>
       <Link
-        to="/about"
+        to="/projects"
         className="mt-4 px-8 py-3 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300 animate-fade-in delay-400"
       >
         View My Work
@@ -114,7 +114,7 @@ function About() {
         <div className="space-y-8 text-sky-100 text-lg leading-relaxed">
           <div>
             <h3 className="text-2xl font-semibold text-sky-300 mb-2">Early Inspiration</h3>
-            <p>Hey, I'm Christian, a recent UCLA mechanical engineering graduate with a passion for building things that move, solve problems, and push boundaries. My journey didn't start in a lab or workshop. It started in my childhood living room, watching Star Trek with my dad and dreaming about the future. I grew up surrounded by engineering influence, my grandfather ran a machine shop in Chatsworth, and my uncle worked on satellites and fighter jets, but I didn't start college as an engineer. I began as a business major.</p>
+            <p>Hi, I'm Christian, a recent UCLA mechanical engineering graduate with a passion for building things that move, solve problems, and push boundaries. My journey didn't start in a lab or workshop. It started in my childhood living room, watching Star Trek with my dad and dreaming about the future. I grew up surrounded by engineering influence, my grandfather ran a machine shop in Chatsworth, and my uncle worked on satellites and fighter jets, but I didn't start college as an engineer. I began as a business major.</p>
           </div>
           <div>
             <h3 className="text-2xl font-semibold text-sky-300 mb-2">The Pivot</h3>
@@ -317,16 +317,6 @@ function Contact() {
       <p className="text-sky-200 mb-2">Thousand Oaks, CA || Los Angeles, CA</p>
       <div className="flex flex-col items-center gap-2 mt-6">
         <motion.a
-          href="https://instagram.com/christian.millar"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
-          whileHover={{ scale: 1.1 }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="currentColor" opacity="0.1"/><path d="M16.75 3H7.25C5.17893 3 3.5 4.67893 3.5 6.75V17.25C3.5 19.3211 5.17893 21 7.25 21H16.75C18.8211 21 20.5 19.3211 20.5 17.25V6.75C20.5 4.67893 18.8211 3 16.75 3Z" stroke="currentColor" strokeWidth="1.5"/><circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth="1.5"/><circle cx="17.25" cy="6.75" r="0.75" fill="currentColor"/></svg>
-          @christian.millar
-        </motion.a>
-        <motion.a
           href="https://github.com/christianmillar31"
           target="_blank"
           rel="noopener noreferrer"
@@ -335,21 +325,6 @@ function Contact() {
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.3 2 1.9 6.3 1.9 12c0 4.4 2.9 8.1 6.8 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1-1-1.3-1-1.3-.8-.6.1-.6.1-.6.9.1 1.4.9 1.4.9.8 1.4 2.1 1 2.6.8.1-.6.3-1 .5-1.2-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-2 1-2.7-.1-.2-.4-1.1.1-2.2 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3.8 0 1.7.1 2.5.3 1.9-1.3 2.7-1 2.7-1 .5 1.1.2 2 .1 2.2.6.7 1 1.6 1 2.7 0 3.7-2.3 4.6-4.5 4.8.3.3.6.8.6 1.7v2.5c0 .3.2.6.7.5 3.9-1.3 6.8-5 6.8-9.4C22.1 6.3 17.7 2 12 2z"/></svg>
           @christianmillar31
-        </motion.a>
-        <motion.a
-          href="https://letterboxd.com/christianmillar/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
-          whileHover={{ scale: 1.1 }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="12" fill="#393939"/>
-            <circle cx="8.5" cy="12" r="2" fill="#FF8000"/>
-            <circle cx="12" cy="12" r="2" fill="#7ED321"/>
-            <circle cx="15.5" cy="12" r="2" fill="#4A90E2"/>
-          </svg>
-          @christianmillar
         </motion.a>
       </div>
     </section>
