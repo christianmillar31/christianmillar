@@ -71,7 +71,7 @@ function Home() {
       <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-lg mb-6 animate-fade-in text-white">
         Christian Millar
       </h1>
-      <h2 className="text-2xl md:text-3xl font-light mb-8 text-sky-200 animate-fade-in delay-200 text-center">
+      <h2 className="text-2xl md:text-3xl font-light mb-8 text-sky-200 animate-fade-in delay-200 text-center max-w-xs sm:max-w-md md:max-w-none break-words whitespace-normal">
         <Typewriter texts={["Engineer.", "Builder.", "Problem-solver."]} />
       </h2>
       <p className="text-lg md:text-xl text-sky-100 mb-6 text-center max-w-2xl animate-fade-in delay-300">
