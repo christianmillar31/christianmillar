@@ -165,8 +165,8 @@ function Projects() {
             >
               <span className="text-5xl mb-4">{icons[0]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white text-center">Autonomous Food Delivery Robot</h3>
-              <p className="text-sky-100 mb-2 text-center">Team Lead, UCLA (2024 – Present)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center w-full max-w-xs mx-auto">
+              <p className="text-sky-100 mb-2 w-full text-center break-words">Team Lead, UCLA (2024 – Present)</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left w-full">
                 <li>Designed and developed the entire autonomous system using SIMULINK and State Flow</li>
                 <li>Integrated hardware: IR sensors, servo motors, PID controllers, ultrasonic sensing</li>
                 <li>Electronics design: wiring, soldering, software integration</li>
@@ -234,8 +234,8 @@ function Projects() {
             >
               <span className="text-5xl mb-4">{icons[1]}</span>
               <h3 className="text-2xl font-semibold mb-2 text-white text-center">Custom Built RC Submersible</h3>
-              <p className="text-sky-100 mb-2 text-center">Personal Project (2025 – Present)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center w-full max-w-xs mx-auto">
+              <p className="text-sky-100 mb-2 w-full text-center break-words">Personal Project (2025 – Present)</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left w-full">
                 <li>Designing and fabricating a remotely operated underwater vehicle (ROV)</li>
                 <li>Arduino-based electronics, IR remote, custom propulsion, buoyancy control</li>
               </ul>
