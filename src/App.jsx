@@ -16,7 +16,7 @@ function SpaceBackground() {
         {[...Array(60)].map((_, i) => (
           <div
             key={i}
-            className="absolute bg-white rounded-full opacity-20 animate-twinkle"
+            className="absolute bg-white rounded-full opacity-10 sm:opacity-20 animate-twinkle"
             style={{
               width: `${Math.random() * 2 + 1}px`,
               height: `${Math.random() * 2 + 1}px`,
@@ -104,7 +104,7 @@ function About() {
           <span className="text-5xl text-white">👨‍🚀</span>
         </div>
         <h2 className="text-3xl font-bold text-white mb-2">Christian Millar</h2>
-        <div className="text-lg text-sky-200 mb-1 font-semibold">Mechanical Engineering Graduate from UCLA</div>
+        <div className="text-lg text-sky-200 mb-1 font-semibold text-center w-full">Mechanical Engineering Graduate from UCLA</div>
         <div className="text-base text-sky-300 text-center max-w-xl">
           Passions: space, marine robotics, innovation, product management, and building things that move, solve problems, and push boundaries.
         </div>
