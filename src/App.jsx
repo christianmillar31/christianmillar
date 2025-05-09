@@ -75,7 +75,7 @@ function Home() {
         <Typewriter texts={["Engineer.", "Builder.", "Problem-solver."]} />
       </h2>
       <p className="text-lg md:text-xl text-sky-100 mb-6 text-center max-w-2xl animate-fade-in delay-300">
-        I build robots, write code, and chase problems worth solving — here's what I've made.
+        I build hardware, write code, and chase problems worth solving — here's what I've made.
       </p>
       <Link
         to="/projects"
