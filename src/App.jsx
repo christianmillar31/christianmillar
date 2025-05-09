@@ -8,9 +8,9 @@ function SpaceBackground() {
     <>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-900 via-sky-900 to-black blur-2xl" />
-        <div className="absolute top-1/4 left-1/3 w-60 h-60 sm:w-96 sm:h-96 bg-sky-600 opacity-10 sm:opacity-20 rounded-full blur-2xl sm:blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 sm:w-1/2 sm:h-1/2 bg-blue-800 opacity-10 sm:opacity-20 rounded-full blur-md sm:blur-2xl" />
-        <div className="absolute top-0 right-0 w-1/4 h-1/4 sm:w-1/3 sm:h-1/3 bg-cyan-400 opacity-5 sm:opacity-10 rounded-full blur-md sm:blur-2xl" />
+        <div className="hidden sm:block absolute top-1/4 left-1/3 w-96 h-96 bg-sky-600 opacity-20 rounded-full blur-3xl animate-pulse" />
+        <div className="hidden sm:block absolute bottom-0 right-0 w-1/2 h-1/2 bg-blue-800 opacity-20 rounded-full blur-2xl" />
+        <div className="hidden sm:block absolute top-0 right-0 w-1/3 h-1/3 bg-cyan-400 opacity-10 rounded-full blur-2xl" />
       </div>
       <div className="fixed inset-0 z-0 pointer-events-none">
         {[...Array(60)].map((_, i) => (
@@ -157,20 +157,20 @@ function Projects() {
       <div className="w-full max-w-5xl flex flex-col gap-10">
         {/* Top row: Robot and Submersible side by side */}
         <div className="flex flex-col md:flex-row gap-10 md:gap-8 justify-center flex-wrap">
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex justify-end mx-auto">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto"
             >
               <span className="text-5xl mb-4">{icons[0]}</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white">Autonomous Food Delivery Robot</h3>
-              <p className="text-sky-100 mb-2">Team Lead, UCLA (2024 – Present)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center md:text-left w-full">
-                <li className="mx-auto md:mx-0 max-w-xs">Designed and developed the entire autonomous system using SIMULINK and State Flow</li>
-                <li className="mx-auto md:mx-0 max-w-xs">Integrated hardware: IR sensors, servo motors, PID controllers, ultrasonic sensing</li>
-                <li className="mx-auto md:mx-0 max-w-xs">Electronics design: wiring, soldering, software integration</li>
-                <li className="mx-auto md:mx-0 max-w-xs">Robot detects objects, follows routes, delivers food, and returns home</li>
+              <h3 className="text-2xl font-semibold mb-2 text-white text-center">Autonomous Food Delivery Robot</h3>
+              <p className="text-sky-100 mb-2 text-center">Team Lead, UCLA (2024 – Present)</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center w-full max-w-xs mx-auto">
+                <li>Designed and developed the entire autonomous system using SIMULINK and State Flow</li>
+                <li>Integrated hardware: IR sensors, servo motors, PID controllers, ultrasonic sensing</li>
+                <li>Electronics design: wiring, soldering, software integration</li>
+                <li>Robot detects objects, follows routes, delivers food, and returns home</li>
               </ul>
             </motion.div>
           </div>
@@ -226,18 +226,18 @@ function Projects() {
             </motion.div>
           </div>
           {/* SWAPPED: RC Submersible now in bottom row */}
-          <div className="flex-1 flex justify-start mt-10 md:mt-0">
+          <div className="flex-1 flex justify-start mt-10 md:mt-0 mx-auto">
             <motion.div
               whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center w-full max-w-md transition-transform duration-300 text-center max-w-xs mx-auto"
             >
               <span className="text-5xl mb-4">{icons[1]}</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white">Custom Built RC Submersible</h3>
-              <p className="text-sky-100 mb-2">Personal Project (2025 – Present)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center md:text-left w-full">
-                <li className="mx-auto md:mx-0 max-w-xs">Designing and fabricating a remotely operated underwater vehicle (ROV)</li>
-                <li className="mx-auto md:mx-0 max-w-xs">Arduino-based electronics, IR remote, custom propulsion, buoyancy control</li>
+              <h3 className="text-2xl font-semibold mb-2 text-white text-center">Custom Built RC Submersible</h3>
+              <p className="text-sky-100 mb-2 text-center">Personal Project (2025 – Present)</p>
+              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-center w-full max-w-xs mx-auto">
+                <li>Designing and fabricating a remotely operated underwater vehicle (ROV)</li>
+                <li>Arduino-based electronics, IR remote, custom propulsion, buoyancy control</li>
               </ul>
             </motion.div>
           </div>
