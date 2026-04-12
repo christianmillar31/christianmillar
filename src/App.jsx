@@ -2,36 +2,38 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-function SpaceBackground() {
-  // Cosmic blue background and animated stars
+// -----------------------------------------------------------------------------
+// Dramatic surface: near-black base + two oversized gradient blobs + grid + noise
+// -----------------------------------------------------------------------------
+function DramaticBackground() {
   return (
-    <>
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-900 via-sky-900 to-black blur-2xl" />
-        <div className="hidden sm:block absolute top-1/4 left-1/3 w-96 h-96 bg-sky-600 opacity-20 rounded-full blur-3xl animate-pulse" />
-        <div className="hidden sm:block absolute bottom-0 right-0 w-1/2 h-1/2 bg-blue-800 opacity-20 rounded-full blur-2xl" />
-        <div className="hidden sm:block absolute top-0 right-0 w-1/3 h-1/3 bg-cyan-400 opacity-10 rounded-full blur-2xl" />
-      </div>
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        {[...Array(60)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-white rounded-full opacity-10 sm:opacity-20 animate-twinkle"
-            style={{
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-            }}
-          />
-        ))}
-      </div>
-    </>
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-surface">
+      <div className="absolute inset-0 grid-lines opacity-60" />
+      <div
+        className="absolute -top-40 -left-40 w-[70vw] h-[70vw] rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle at 30% 30%, #8B5CF6 0%, transparent 60%)',
+          mixBlendMode: 'screen',
+          opacity: 0.55,
+        }}
+      />
+      <div
+        className="absolute -bottom-40 -right-40 w-[70vw] h-[70vw] rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle at 70% 70%, #F43F5E 0%, transparent 60%)',
+          mixBlendMode: 'screen',
+          opacity: 0.5,
+        }}
+      />
+      <div className="absolute inset-0 noise opacity-[0.06] mix-blend-overlay" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/60" />
+    </div>
   );
 }
 
-// Typewriter effect for hero text
+// -----------------------------------------------------------------------------
+// Typewriter (kept, restyled externally)
+// -----------------------------------------------------------------------------
 function Typewriter({ texts, speed = 80, pause = 1200 }) {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
@@ -54,311 +56,508 @@ function Typewriter({ texts, speed = 80, pause = 1200 }) {
   return (
     <span>
       {texts[index].substring(0, subIndex)}
-      <span className="animate-pulse">|</span>
+      <span className="inline-block w-[0.6ch] animate-caret-blink">_</span>
     </span>
   );
 }
 
+// -----------------------------------------------------------------------------
+// Marquee strip
+// -----------------------------------------------------------------------------
+function Marquee({ items }) {
+  const row = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden border-y border-white/10 py-6">
+      <div className="flex gap-16 whitespace-nowrap animate-marquee">
+        {row.map((t, i) => (
+          <span
+            key={i}
+            className="font-display font-black text-2xl tracking-tight text-ink/80 uppercase"
+          >
+            {t}
+            <span className="text-secondary mx-8">●</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Home
+// -----------------------------------------------------------------------------
 function Home() {
   return (
     <motion.main
-      className="relative z-10 flex flex-col items-center px-6 py-32 min-h-screen justify-center"
+      className="relative z-10 min-h-screen flex flex-col justify-end pt-32"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.6 }}
     >
-      <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-lg mb-6 animate-fade-in text-white">
-        Christian Millar
-      </h1>
-      <h2 className="text-2xl md:text-3xl font-light mb-8 text-sky-200 animate-fade-in delay-200 text-center max-w-xs sm:max-w-md md:max-w-none break-words whitespace-normal">
-        <Typewriter texts={["Engineer.", "Builder.", "Problem-solver."]} />
-      </h2>
-      <p className="text-lg md:text-xl text-sky-100 mb-6 text-center max-w-2xl animate-fade-in delay-300">
-        I build hardware, write code, and chase problems worth solving — here's what I've made.
-      </p>
-      <Link
-        to="/projects"
-        className="mt-4 px-8 py-3 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300 animate-fade-in delay-400"
-      >
-        View My Work
-      </Link>
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 max-w-[1400px] w-full mx-auto">
+        <div className="font-mono text-xs md:text-sm text-ink/60 mb-8 flex items-center gap-3">
+          <span className="inline-block w-8 h-px bg-secondary" />
+          PORTFOLIO / 2026
+        </div>
+        <h1
+          className="font-display font-black leading-[0.85] tracking-tighter text-ink"
+          style={{ fontSize: 'clamp(64px, 14vw, 220px)' }}
+        >
+          CHRISTIAN
+          <br />
+          <span className="stroke-text">MILLAR.</span>
+        </h1>
+        <div className="mt-8 font-mono text-lg md:text-xl text-secondary">
+          <Typewriter texts={['engineer.', 'builder.', 'problem-solver.']} />
+        </div>
+        <p className="mt-6 max-w-2xl text-lg md:text-xl text-ink/80 font-normal leading-relaxed">
+          I build servo drive systems, ML pipelines, robots, submersibles, and whatever else
+          I can get my hands on. Here&rsquo;s some of it.
+        </p>
+        <div className="mt-10 border-l-2 border-secondary pl-6 py-2 max-w-2xl">
+          <div className="font-mono text-xs text-secondary mb-2 uppercase tracking-widest">
+            // CURRENTLY
+          </div>
+          <div className="font-display font-black text-xl md:text-2xl uppercase tracking-tight text-ink leading-tight">
+            Electrical Engineer
+          </div>
+          <div className="font-mono text-sm text-ink/60 mt-1">
+            Advanced Motion Controls · Camarillo, CA · 2025 — Present
+          </div>
+        </div>
+        <div className="mt-8 flex flex-wrap gap-4 items-center">
+          <Link
+            to="/projects"
+            className="group inline-flex items-center gap-3 bg-ink text-surface font-display font-black uppercase tracking-wide text-base px-6 py-4 hover:bg-secondary hover:text-ink transition-colors"
+          >
+            View the work
+            <span className="font-mono font-normal">→</span>
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 border border-white/20 text-ink font-display font-black uppercase tracking-wide text-base px-6 py-4 hover:border-secondary hover:text-secondary transition-colors"
+          >
+            Get in touch
+          </Link>
+        </div>
+      </div>
+      <div className="mt-24">
+        <Marquee items={['HARDWARE', 'SPACE', 'ROBOTICS', 'PRODUCT', 'BUILD', 'SHIP']} />
+      </div>
     </motion.main>
   );
 }
 
+// -----------------------------------------------------------------------------
+// About
+// -----------------------------------------------------------------------------
 function About() {
+  const sections = [
+    {
+      title: 'Early Inspiration',
+      body:
+        "I'm Christian. UCLA mechanical engineering, class of '24. Now I'm an electrical engineer at Advanced Motion Controls in Camarillo. Grew up in Thousand Oaks watching Star Trek with my dad. My grandfather ran a machine shop in Chatsworth; my uncle built satellites and fighter jets. Enough hours staring up at my heroes and the ceiling of the Griffith Planetarium, I figured I could chart my own path too.",
+    },
+    {
+      title: 'The Pivot',
+      body:
+        "The day I graduated high school was the same day SpaceX flew Launch America. I switched majors as soon as I could and graduated with a ME degree from the Samueli School of Engineering.",
+    },
+    {
+      title: 'Hands-On Learning',
+      body:
+        "Before any of that I was mixing homemade rocket fuel in my friend's front yard and competing in FIRST Robotics. At UCLA I joined Sigma Eta Pi and spent a lot of time around people starting companies. Most of what I know about shipping came from watching them.",
+    },
+    {
+      title: 'What Drives Me',
+      body:
+        "Since then: autonomous robots, underwater submersibles, ML models, a few apps. Hardware, firmware, software, whichever the problem needs. I'm mostly interested in the messy integration layer where nothing works the first time.",
+    },
+  ];
   return (
     <motion.section
-      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32"
+      className="relative z-10 min-h-screen px-6 md:px-12 py-32 max-w-[1400px] mx-auto"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Hero section with image, subtitle, and passions */}
-      <div className="flex flex-col items-center mb-10">
-        {/* Profile image placeholder (replace src with your image if desired) */}
-        <div className="w-32 h-32 rounded-full bg-gradient-to-br from-sky-500 to-blue-900 shadow-lg mb-4 flex items-center justify-center overflow-hidden">
-          {/* <img src="/profile.jpg" alt="Christian Millar" className="w-full h-full object-cover" /> */}
-          <span className="text-5xl text-white">👨‍🚀</span>
-        </div>
-        <h2 className="text-3xl font-bold text-white mb-2">Christian Millar</h2>
-        <div className="text-lg text-sky-200 mb-1 font-semibold text-center w-full">Mechanical Engineering Graduate from UCLA</div>
-        <div className="text-base text-sky-300 text-center max-w-xl">
-          Passions: space, marine robotics, innovation, product management, and building things that move, solve problems, and push boundaries.
-        </div>
-      </div>
-      {/* Main about card */}
-      <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 max-w-2xl w-full">
-        <div className="space-y-8 text-sky-100 text-lg leading-relaxed">
-          <div>
-            <h3 className="text-2xl font-semibold text-sky-300 mb-2">Early Inspiration</h3>
-            <p>Hi, I'm Christian, a recent UCLA mechanical engineering graduate with a passion for building things that move, solve problems, and push boundaries. My journey didn't start in a lab or workshop. It started in my childhood living room, watching Star Trek with my dad and dreaming about the future. I grew up surrounded by engineering influence, my grandfather ran a machine shop in Chatsworth, and my uncle worked on satellites and fighter jets, but I didn't start college as an engineer. I began as a business major.</p>
+      <div className="font-mono text-xs text-ink/60 mb-8">// CHRISTIAN MILLAR — UCLA ME &rsquo;24 · AMC &rsquo;25</div>
+      <div className="grid md:grid-cols-12 gap-12">
+        <aside className="md:col-span-5">
+          <div className="md:sticky md:top-32">
+            <h2
+              className="font-display font-black leading-[0.85] tracking-tighter text-ink"
+              style={{ fontSize: 'clamp(48px, 8vw, 120px)' }}
+            >
+              LET&rsquo;S
+              <br />
+              <span className="stroke-text">BUILD</span>
+              <br />
+              THINGS
+              <br />
+              THAT WORK.
+            </h2>
+            <p className="mt-6 font-mono text-sm text-ink/60 max-w-xs">
+              Mechanical engineer. Mostly interested in the hardware/software boundary, motor
+              control, embedded systems, things that move.
+            </p>
           </div>
-          <div>
-            <h3 className="text-2xl font-semibold text-sky-300 mb-2">The Pivot</h3>
-            <p>That all changed the day I graduated high school. It happened to be the same day as SpaceX's first Launch America mission, a moment that reignited my childhood awe and made it clear I had to pivot. I switched into engineering, and from that point forward, I never looked back. I finished my mechanical degree in just two years, fueled by purpose and passion.</p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-semibold text-sky-300 mb-2">Hands-On Learning</h3>
-            <p>Even before that switch, I was already getting my hands dirty, mixing homemade rocket fuel in my friend's front yard and launching DIY rockets into the California desert. That same energy carried into my time at UCLA, where I joined Sigma Eta Pi, the university's entrepreneurship fraternity. There, I worked alongside startup founders, built projects from scratch, and learned what it meant to be resourceful, creative, and relentlessly driven.</p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-semibold text-sky-300 mb-2">What Drives Me</h3>
-            <p>Since then, I've built autonomous robots, designed underwater submersibles, created apps and websites, and tackled technical challenges across mechanical, electrical, and software domains. Whether I'm wiring motors, prototyping hardware, or debugging code, I approach every project with curiosity, precision, and grit.</p>
-            <p className="mt-4">But more than anything, I'm driven by connection. I believe the best engineers aren't just problem-solvers, they're collaborators, communicators, and teammates. What sets me apart is my ability to form genuine relationships and bring energy to every team I'm on.</p>
-            <p className="mt-4 font-bold text-white">Let's build something remarkable.</p>
-          </div>
+        </aside>
+        <div className="md:col-span-7 space-y-12">
+          {sections.map((s, i) => (
+            <article key={s.title} className="pl-6 border-l-2 border-secondary/60">
+              <div className="font-mono text-xs text-secondary mb-2">
+                {String(i + 1).padStart(2, '0')} / {String(sections.length).padStart(2, '0')}
+              </div>
+              <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink mb-4">
+                {s.title}
+              </h3>
+              <p className="text-lg text-ink/80 leading-relaxed font-normal">{s.body}</p>
+            </article>
+          ))}
         </div>
       </div>
     </motion.section>
   );
 }
 
+// -----------------------------------------------------------------------------
+// Projects
+// -----------------------------------------------------------------------------
+const PROJECTS = [
+  {
+    tag: 'Live · draftai.live · 2025 — Present',
+    title: 'DraftAI — ML Fantasy Football',
+    bullets: [
+      'ML projection models (ElasticNet, RidgeCV, XGBoost) trained on 8 seasons of NFL data',
+      '128 unique league configurations ranked via Value-Based Drafting',
+      'FastAPI + Jinja2 SSR backend; Python pipeline automated via GitHub Actions',
+      'Live draft board, mock draft simulator, trade analyzer, auction values',
+    ],
+    link: { href: 'https://draftai.live', label: 'Visit draftai.live' },
+  },
+  {
+    tag: 'Built for AMC · 2025 — Present',
+    title: 'Agentic Support Chatbot',
+    bullets: [
+      'RAG pipeline over 372 PDF manuals, datasheets, and application notes',
+      'Claude AI backend with semantic search for support engineers',
+      'Python + Docker, deployed on Hugging Face Spaces',
+      'Built for internal use at Advanced Motion Controls',
+    ],
+    link: { href: 'https://github.com/christianmillar31/amc-support-chatbot', label: 'View on GitHub' },
+  },
+  {
+    tag: 'Team Lead · UCLA · 2024 – Present',
+    title: 'Autonomous Food Delivery Robot',
+    bullets: [
+      'Designed and developed the entire autonomous system using SIMULINK and State Flow',
+      'Integrated IR sensors, servo motors, PID controllers, and ultrasonic sensing',
+      'Full electronics design: wiring, soldering, software integration',
+      'Detects objects, follows routes, delivers food, and returns home',
+    ],
+  },
+  {
+    tag: 'Personal Project · 2025 – Present',
+    title: 'Custom Built RC Submersible',
+    bullets: [
+      'Designing and fabricating a remotely operated underwater vehicle (ROV)',
+      'Arduino-based electronics, IR remote, custom propulsion, buoyancy control',
+    ],
+  },
+  {
+    tag: 'Demo & Report',
+    title: 'Food Delivery Robot — Demo',
+    embedVideo: 'https://www.youtube.com/embed/EK-CFdtdBk4',
+    pdfHref: '/Project%20Delivery%20Report.pdf',
+    pdfLabel: 'Project design report (PDF)',
+  },
+  {
+    tag: 'Work in Progress · 2025 – Present',
+    title: 'SongBattle (iOS App)',
+    bullets: [
+      'Shazam-style music guessing game for teams',
+      'Modern SwiftUI interface, Spotify integration',
+      'Fair song selection, scoring, and team management',
+    ],
+    link: { href: 'https://github.com/christianmillar31/SongBattle', label: 'View on GitHub' },
+  },
+  {
+    tag: '2025 – Present',
+    title: 'CNVP Website',
+    bullets: ['Website for CNVP', 'Modern web technologies and design'],
+    link: { href: 'https://github.com/christianmillar31', label: 'View on GitHub' },
+  },
+  {
+    tag: 'Lead · UCLA · Summer 2023',
+    title: 'Robotic Arm Manipulator',
+    bullets: [
+      'Designed and developed robotic arms for a 100+ part manipulator',
+      'Calculated torque and stress for safe, reliable movement',
+      'Produced engineering drawings and CAD for manufacturing',
+    ],
+  },
+];
+
+function ProjectCard({ project, index, total }) {
+  return (
+    <motion.article
+      whileHover={{ y: -4 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="group relative bg-surface border border-white/10 hover:border-secondary transition-colors p-8 flex flex-col min-h-[420px]"
+    >
+      <div className="flex items-start justify-between mb-6">
+        <span className="font-mono text-xs text-secondary">
+          {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+        </span>
+        <span className="font-mono text-xs text-ink/50 text-right max-w-[60%]">{project.tag}</span>
+      </div>
+      <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink leading-none mb-4">
+        {project.title}
+      </h3>
+      <span className="h-px w-12 bg-secondary mb-6 group-hover:w-full transition-all duration-500" />
+      {project.bullets && (
+        <ul className="space-y-2 text-ink/75 text-base font-normal leading-relaxed flex-1">
+          {project.bullets.map((b) => (
+            <li key={b} className="flex gap-3">
+              <span className="font-mono text-secondary">→</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {project.embedVideo && (
+        <div className="mt-2 aspect-video w-full overflow-hidden border border-white/10">
+          <iframe
+            src={project.embedVideo}
+            title={project.title}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="w-full h-full"
+          />
+        </div>
+      )}
+      {project.pdfHref && (
+        <a
+          href={project.pdfHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 font-mono text-sm text-secondary hover:text-ink underline underline-offset-4"
+        >
+          ↗ {project.pdfLabel}
+        </a>
+      )}
+      {project.link && (
+        <a
+          href={project.link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 font-mono text-sm text-secondary hover:text-ink underline underline-offset-4"
+        >
+          ↗ {project.link.label}
+        </a>
+      )}
+    </motion.article>
+  );
+}
+
 function Projects() {
-  // Example icons (replace with your own or use react-icons)
-  const icons = [
-    "🚗", // Robot
-    "🌊", // Submarine
-    "🤖", // Arm
-    "📄", // Report/Video
-  ];
   return (
     <motion.section
-      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-32"
+      className="relative z-10 min-h-screen px-6 md:px-12 py-32 max-w-[1400px] mx-auto"
       id="projects"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <h2 className="text-4xl font-bold mb-12 text-white">Projects</h2>
-      <div className="w-full max-w-5xl flex flex-col gap-10">
-        {/* Top row: Robot and Submersible side by side */}
-        <div className="flex flex-col items-center justify-center md:flex-row gap-10 md:gap-8 md:justify-center flex-wrap">
-          <div className="flex justify-center w-full md:flex-1 md:justify-end mx-auto">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center transition-transform duration-300 text-center mx-auto w-[400px] h-[500px]"
-            >
-              <span className="text-5xl mb-4">{icons[0]}</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white text-center">Autonomous Food Delivery Robot</h3>
-              <p className="text-sky-100 mb-2 w-full text-center break-words md:w-auto md:break-normal">Team Lead, UCLA (<span className="whitespace-nowrap">2024 –{'\u00A0'}Present</span>)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left w-full">
-                <li>Designed and developed the entire autonomous system using SIMULINK and State Flow</li>
-                <li>Integrated hardware: IR sensors, servo motors, PID controllers, ultrasonic sensing</li>
-                <li>Electronics design: wiring, soldering, software integration</li>
-                <li>Robot detects objects, follows routes, delivers food, and returns home</li>
-              </ul>
-            </motion.div>
-          </div>
-          {/* SWAPPED: Demo & Report Box now in top row */}
-          <div className="flex justify-center w-full md:flex-1 md:justify-start mt-10 md:mt-0">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-gradient-to-br from-sky-900 via-blue-800 to-black/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border-2 border-sky-400/40 flex flex-col items-center transition-transform duration-300 mx-auto w-[400px] h-[500px] overflow-hidden"
-            >
-              <span className="text-6xl mb-4">{icons[3]}</span>
-              <h3 className="text-2xl font-bold mb-2 text-sky-200 text-center">Autonomous Food Delivery Robot<br/>Demo & Report</h3>
-              <a
-                href="/Project%20Delivery%20Report.pdf"
-                className="text-sky-300 underline hover:text-sky-100 mt-2 mb-4 block text-lg font-semibold"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                📄 View Project Design Report (PDF)
-              </a>
-              <div className="w-full aspect-w-16 aspect-h-9 mt-4 rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.youtube.com/embed/EK-CFdtdBk4"
-                  title="Robot Demo"
-                  frameBorder="0"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg"
-                ></iframe>
-              </div>
-              <div className="mt-4 text-sky-100 text-center text-sm">
-                <strong>See the robot in action and read the full engineering report!</strong>
-              </div>
-            </motion.div>
-          </div>
+      <div className="flex items-end justify-between flex-wrap gap-6 mb-16">
+        <h2
+          className="font-display font-black leading-[0.85] tracking-tighter text-ink"
+          style={{ fontSize: 'clamp(56px, 12vw, 180px)' }}
+        >
+          SELECTED
+          <br />
+          <span className="stroke-text">WORK.</span>
+        </h2>
+        <div className="font-mono text-sm text-ink/60 max-w-xs">
+          // {PROJECTS.length} PROJECTS · HARDWARE, SOFTWARE, IN BETWEEN
         </div>
-        {/* Bottom row: Robotic Arm and RC Submersible side by side on desktop, stacked on mobile */}
-        <div className="flex flex-col items-center justify-center md:flex-row gap-10 md:gap-8 md:justify-center mt-10">
-          <div className="flex justify-center w-full md:flex-1 md:justify-end">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center transition-transform duration-300 mx-auto w-[400px] h-[500px]"
-            >
-              <span className="text-5xl mb-4">{icons[2]}</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white">Robotic Arm Manipulator</h3>
-              <p className="text-sky-100 mb-2">Lead, UCLA (Summer 2023)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left">
-                <li>Designed and developed robotic arms for a 100+ part manipulator</li>
-                <li>Calculated torque and stress for safe, reliable movement</li>
-                <li>Produced engineering drawings and CAD for manufacturing</li>
-              </ul>
-            </motion.div>
-          </div>
-          {/* SWAPPED: RC Submersible now in bottom row */}
-          <div className="flex justify-center w-full md:flex-1 md:justify-start mt-10 md:mt-0 mx-auto">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center transition-transform duration-300 mx-auto w-[400px] h-[500px]"
-            >
-              <span className="text-5xl mb-4">{icons[1]}</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white text-center">Custom Built RC Submersible</h3>
-              <p className="text-sky-100 mb-2 w-full text-center break-words md:w-auto md:break-normal">Personal Project (<span className="whitespace-nowrap">2025 – Present</span>)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left w-full">
-                <li>Designing and fabricating a remotely operated underwater vehicle (ROV)</li>
-                <li>Arduino-based electronics, IR remote, custom propulsion, buoyancy control</li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-        {/* Add SongBattle and CNVP project cards below the existing project rows */}
-        <div className="flex flex-col items-center justify-center md:flex-row gap-10 md:gap-8 md:justify-center mt-10">
-          {/* SongBattle Project Card */}
-          <div className="flex justify-center w-full md:flex-1 md:justify-end">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center transition-transform duration-300 mx-auto w-[400px] h-[500px]"
-            >
-              <span className="text-5xl mb-4">🎵</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white">SongBattle (iOS App)</h3>
-              <p className="text-sky-100 mb-2">Work in Progress (2025 – Present)</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left">
-                <li>Shazam-style music guessing game for teams</li>
-                <li>Modern SwiftUI interface, Spotify integration</li>
-                <li>Fair song selection, scoring, and team management</li>
-              </ul>
-              <a
-                href="https://github.com/christianmillar31/SongBattle"
-                className="text-sky-300 underline hover:text-sky-100 mt-2 mb-4 block"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a>
-            </motion.div>
-          </div>
-          {/* CNVP Project Card */}
-          <div className="flex justify-center w-full md:flex-1 md:justify-start mt-10 md:mt-0">
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0, 200, 255, 0.15)" }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-sky-400/20 flex flex-col items-center transition-transform duration-300 mx-auto w-[400px] h-[500px]"
-            >
-              <span className="text-5xl mb-4">🌐</span>
-              <h3 className="text-2xl font-semibold mb-2 text-white">CNVP Website</h3>
-              <p className="text-sky-100 mb-2">2025 – Present</p>
-              <ul className="text-sky-200 text-sm mb-2 list-disc list-inside text-left">
-                <li>Website for CNVP</li>
-                <li>Modern web technologies and design</li>
-              </ul>
-              <a
-                href="https://github.com/christianmillar31"
-                className="text-sky-300 underline hover:text-sky-100 mt-2 mb-4 block"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a>
-            </motion.div>
-          </div>
-        </div>
+      </div>
+      <div className="grid md:grid-cols-2 gap-6">
+        {PROJECTS.map((p, i) => (
+          <ProjectCard key={p.title} project={p} index={i} total={PROJECTS.length} />
+        ))}
       </div>
     </motion.section>
   );
 }
 
+// -----------------------------------------------------------------------------
+// Resume
+// -----------------------------------------------------------------------------
 function Resume() {
   return (
-    <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-32">
-      <h2 className="text-4xl font-bold mb-4 text-white">Resume</h2>
-      <a href="/CHRISTIANMILLARARPIL29.pdf" className="mb-4 underline text-sky-300 hover:text-sky-100" download>Download PDF</a>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-32">
-      <h2 className="text-4xl font-bold mb-4 text-white">Contact</h2>
-      <p className="text-sky-100 mb-2">Email: <a href="mailto:christianmillar31@gmail.com" className="underline hover:text-sky-300">christianmillar31@gmail.com</a></p>
-      <p className="text-sky-100 mb-2">Phone: <a href="tel:8058077790" className="underline hover:text-sky-300">(805) 807-7790</a></p>
-      <p className="text-sky-200 mb-2">Thousand Oaks, CA || Los Angeles, CA</p>
-      <div className="flex flex-col items-center gap-2 mt-6">
-        <motion.a
-          href="https://github.com/christianmillar31"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold text-lg underline"
-          whileHover={{ scale: 1.1 }}
+    <motion.section
+      className="relative z-10 min-h-screen px-6 md:px-12 py-32 max-w-[1400px] mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="font-mono text-xs text-ink/60 mb-8">// RESUME / PDF</div>
+      <h2
+        className="font-display font-black leading-[0.85] tracking-tighter text-ink mb-8"
+        style={{ fontSize: 'clamp(72px, 16vw, 260px)' }}
+      >
+        RESUME<span className="stroke-text">.</span>
+      </h2>
+      <p className="font-mono text-sm text-ink/60 max-w-md mb-8">
+        Education, experience, tools. Shorter than this site.
+      </p>
+      <a
+        href="/ChristianMillarResume2026.pdf"
+        download
+        className="inline-flex items-center gap-3 bg-ink text-surface font-display font-black uppercase tracking-wide text-base px-6 py-4 hover:bg-secondary hover:text-ink transition-colors"
+      >
+        Download PDF
+        <span className="font-mono font-normal">↓</span>
+      </a>
+      <div className="mt-12 border border-white/10 bg-black/40">
+        <object
+          data="/ChristianMillarResume2026.pdf"
+          type="application/pdf"
+          className="w-full h-[80vh]"
+          aria-label="Resume preview"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.3 2 1.9 6.3 1.9 12c0 4.4 2.9 8.1 6.8 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1-1-1.3-1-1.3-.8-.6.1-.6.1-.6.9.1 1.4.9 1.4.9.8 1.4 2.1 1 2.6.8.1-.6.3-1 .5-1.2-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-2 1-2.7-.1-.2-.4-1.1.1-2.2 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3.8 0 1.7.1 2.5.3 1.9-1.3 2.7-1 2.7-1 .5 1.1.2 2 .1 2.2.6.7 1 1.6 1 2.7 0 3.7-2.3 4.6-4.5 4.8.3.3.6.8.6 1.7v2.5c0 .3.2.6.7.5 3.9-1.3 6.8-5 6.8-9.4C22.1 6.3 17.7 2 12 2z"/></svg>
-          @christianmillar31
-        </motion.a>
+          <p className="p-8 font-mono text-sm text-ink/60">
+            Your browser can&rsquo;t display embedded PDFs.{' '}
+            <a href="/ChristianMillarResume2026.pdf" className="text-secondary underline">
+              Download it here.
+            </a>
+          </p>
+        </object>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
+// -----------------------------------------------------------------------------
+// Contact
+// -----------------------------------------------------------------------------
+function Contact() {
+  const rows = [
+    { label: 'EMAIL', value: 'christianmillar31@gmail.com', href: 'mailto:christianmillar31@gmail.com' },
+    { label: 'PHONE', value: '(805) 807-7790', href: 'tel:8058077790' },
+    { label: 'LOCATION', value: 'Thousand Oaks, CA · Los Angeles, CA' },
+    { label: 'GITHUB', value: '@christianmillar31', href: 'https://github.com/christianmillar31' },
+  ];
+  return (
+    <motion.section
+      className="relative z-10 min-h-screen px-6 md:px-12 py-32 max-w-[1400px] mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="font-mono text-xs text-ink/60 mb-8">// SAY HELLO</div>
+      <h2
+        className="font-display font-black leading-[0.85] tracking-tighter text-ink mb-16"
+        style={{ fontSize: 'clamp(72px, 16vw, 260px)' }}
+      >
+        CONTACT<span className="stroke-text">.</span>
+      </h2>
+      <div className="border-t border-white/10">
+        {rows.map((r) => {
+          const Wrapper = r.href ? motion.a : 'div';
+          const wrapperProps = r.href
+            ? {
+                href: r.href,
+                target: r.href.startsWith('http') ? '_blank' : undefined,
+                rel: r.href.startsWith('http') ? 'noopener noreferrer' : undefined,
+                whileHover: { x: 8 },
+              }
+            : {};
+          return (
+            <Wrapper
+              key={r.label}
+              {...wrapperProps}
+              className="grid grid-cols-12 gap-6 py-6 border-b border-white/10 group items-baseline"
+            >
+              <span className="col-span-12 md:col-span-3 font-mono text-xs text-ink/50 uppercase tracking-widest">
+                {r.label}
+              </span>
+              <span
+                className={`col-span-12 md:col-span-9 font-display font-black text-2xl md:text-[40px] leading-none tracking-tight ${
+                  r.href ? 'text-ink group-hover:text-secondary transition-colors' : 'text-ink'
+                }`}
+              >
+                {r.value}
+              </span>
+            </Wrapper>
+          );
+        })}
+      </div>
+    </motion.section>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Navbar
+// -----------------------------------------------------------------------------
 function Navbar() {
   const location = useLocation();
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    { to: '/projects', label: 'Projects' },
+    { to: '/projects', label: 'Work' },
     { to: '/resume', label: 'Resume' },
     { to: '/contact', label: 'Contact' },
   ];
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-black/80 via-blue-900/80 to-sky-900/80 backdrop-blur-md shadow-lg flex justify-center py-3 px-2">
-      <ul className="flex flex-nowrap gap-3 sm:gap-6 md:gap-8 text-base sm:text-lg font-semibold text-sky-100 overflow-x-auto scrollbar-hide">
-        {navLinks.map((link) => (
-          <li key={link.to} className="shrink-0">
-            <Link
-              to={link.to}
-              className={`hover:text-white transition ${location.pathname === link.to ? 'text-white underline underline-offset-8' : ''}`}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <nav className="fixed top-0 left-0 w-full z-20 bg-surface/80 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-12 py-5">
+        <Link
+          to="/"
+          className="font-mono font-bold text-base text-ink hover:text-secondary transition-colors"
+          aria-label="Home"
+        >
+          CM<span className="text-secondary">.</span>
+        </Link>
+        <ul className="flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide">
+          {navLinks.map((link) => {
+            const active = location.pathname === link.to;
+            return (
+              <li key={link.to} className="shrink-0 relative">
+                <Link
+                  to={link.to}
+                  className={`font-display font-black uppercase tracking-wide text-xs sm:text-sm transition-colors ${
+                    active ? 'text-ink' : 'text-ink/60 hover:text-ink'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+                {active && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-secondary"
+                  />
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }
 
-// Back-to-top button
+// -----------------------------------------------------------------------------
+// Back to top
+// -----------------------------------------------------------------------------
 function BackToTopButton() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -375,31 +574,33 @@ function BackToTopButton() {
           exit={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.3 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-500 text-white rounded-full p-4 shadow-lg focus:outline-none"
+          className="fixed bottom-6 right-6 z-50 bg-primary text-ink hover:bg-secondary font-mono font-bold text-lg w-12 h-12 flex items-center justify-center shadow-lg"
           aria-label="Back to top"
         >
-          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" /></svg>
+          ↑
         </motion.button>
       )}
     </AnimatePresence>
   );
 }
 
+// -----------------------------------------------------------------------------
+// Shell
+// -----------------------------------------------------------------------------
 function App() {
-  // Scroll to top on route change for better UX
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
   return (
-    <div className="relative min-h-screen font-sans">
-      <SpaceBackground />
+    <div className="relative min-h-screen font-sans text-ink bg-surface">
+      <DramaticBackground />
       <Navbar />
       <BackToTopButton />
-      <div className="pt-6 md:pt-8">
+      <div className="pt-20">
         <AnimatePresence mode="wait">
-          <Routes>
+          <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
