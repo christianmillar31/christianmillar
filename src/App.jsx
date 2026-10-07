@@ -118,9 +118,6 @@ function Home() {
           <div className="font-display font-black text-xl md:text-2xl uppercase tracking-tight text-ink leading-tight">
             Electromechanical Engineer
           </div>
-          <div className="font-mono text-sm text-ink/60 mt-1">
-            Advanced Motion Controls · Camarillo, CA · 2025 — Present
-          </div>
         </div>
         <div className="mt-8 flex flex-wrap gap-4 items-center">
           <Link
