@@ -297,7 +297,7 @@ const PROJECTS = [
       'United States nuclear submarines',
       'The Griffith Observatory and astronomy',
       'Solid rocket propulsion and static-fire testing',
-      'Deep-sea exploration and remotely operated vehicles',
+      'Studying engineering disasters: the St. Francis Dam of 1928 and OceanGate',
     ],
   },
 ];
