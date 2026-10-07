@@ -96,10 +96,6 @@ function Home() {
       transition={{ duration: 0.6 }}
     >
       <div className="flex-1 flex flex-col justify-center px-6 md:px-12 max-w-[1400px] w-full mx-auto">
-        <div className="font-mono text-xs md:text-sm text-ink/60 mb-8 flex items-center gap-3">
-          <span className="inline-block w-8 h-px bg-secondary" />
-          PORTFOLIO / 2026
-        </div>
         <h1
           className="font-display font-black leading-[0.85] tracking-tighter text-ink"
           style={{ fontSize: 'clamp(64px, 14vw, 220px)' }}
@@ -112,8 +108,8 @@ function Home() {
           <Typewriter texts={['engineer.', 'builder.', 'problem-solver.']} />
         </div>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-ink/80 font-normal leading-relaxed">
-          I build servo drive systems, ML pipelines, robots, submersibles, and whatever else
-          I can get my hands on. Here&rsquo;s some of it.
+          I like to build servo drive systems, ML pipelines, robots, submersibles, and whatever
+          else I can get my hands on. Here&rsquo;s some things I&rsquo;ve done.
         </p>
         <div className="mt-10 border-l-2 border-secondary pl-6 py-2 max-w-2xl">
           <div className="font-mono text-xs text-secondary mb-2 uppercase tracking-widest">
@@ -275,20 +271,15 @@ const PROJECTS = [
     pdfLabel: 'Project design report (PDF)',
   },
   {
-    tag: 'Work in Progress · 2025 – Present',
-    title: 'SongBattle (iOS App)',
+    tag: 'Live on the App Store · 2025 — Present',
+    title: 'SongSmash (iOS App)',
     bullets: [
-      'Shazam-style music guessing game for teams',
-      'Modern SwiftUI interface, Spotify integration',
-      'Fair song selection, scoring, and team management',
+      'Team music-guessing game: a mystery clip plays, name the song and artist before the reveal',
+      'SwiftUI; 30-second previews from the Apple Music catalog, no account or subscription needed',
+      'Genre, decade, and difficulty filters with smart repeat protection across rounds',
+      'Free on the App Store since September 2026',
     ],
-    link: { href: 'https://github.com/christianmillar31/SongBattle', label: 'View on GitHub' },
-  },
-  {
-    tag: '2025 – Present',
-    title: 'CNVP Website',
-    bullets: ['Website for CNVP', 'Modern web technologies and design'],
-    link: { href: 'https://github.com/christianmillar31', label: 'View on GitHub' },
+    link: { href: 'https://apps.apple.com/us/app/songsmash/id6801002521', label: 'Get it on the App Store' },
   },
   {
     tag: 'Lead · UCLA · Summer 2023',
@@ -297,6 +288,16 @@ const PROJECTS = [
       'Designed and developed robotic arms for a 100+ part manipulator',
       'Calculated torque and stress for safe, reliable movement',
       'Produced engineering drawings and CAD for manufacturing',
+    ],
+  },
+  {
+    tag: 'Niche engineering interests · Off the clock',
+    title: 'Rabbit Holes',
+    bullets: [
+      'United States nuclear submarines',
+      'The Griffith Observatory and astronomy',
+      'Solid rocket propulsion and static-fire testing',
+      'Deep-sea exploration and remotely operated vehicles',
     ],
   },
 ];
@@ -383,9 +384,6 @@ function Projects() {
           <br />
           <span className="stroke-text">WORK.</span>
         </h2>
-        <div className="font-mono text-sm text-ink/60 max-w-xs">
-          // {PROJECTS.length} PROJECTS · HARDWARE, SOFTWARE, IN BETWEEN
-        </div>
       </div>
       <div className="grid md:grid-cols-2 gap-6">
         {PROJECTS.map((p, i) => (
