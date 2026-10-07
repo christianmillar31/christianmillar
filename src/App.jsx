@@ -165,7 +165,7 @@ function About() {
     {
       title: 'What Drives Me',
       body:
-        "Since then: autonomous robots, underwater submersibles, ML models, a few apps. Hardware, firmware, software, whichever the problem needs. I'm mostly interested in the messy integration layer where nothing works the first time.",
+        "Since then: autonomous robots, underwater submersibles, ML models, a few apps. Hardware, firmware, software, whichever the problem needs. I'm mostly interested in a bit of everything and how I can make them work together.",
     },
   ];
   return (
