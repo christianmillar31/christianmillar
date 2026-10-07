@@ -327,7 +327,7 @@ const PROJECTS = [
 
 // Display order on the Work page. Cards are numbered continuously across groups.
 const PROJECT_GROUPS = [
-  { key: 'side', title: 'Side Projects' },
+  { key: 'side', title: 'Side Projects (This Past Year)' },
   { key: 'ucla', title: 'UCLA' },
 ];
 const ORDERED_PROJECTS = PROJECT_GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g.key));
