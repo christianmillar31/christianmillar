@@ -68,7 +68,10 @@ function Marquee({ items }) {
   const row = [...items, ...items];
   return (
     <div className="relative overflow-hidden border-y border-white/10 py-6">
-      <div className="flex gap-16 whitespace-nowrap animate-marquee">
+      <div
+        className="flex gap-16 whitespace-nowrap animate-marquee"
+        style={{ animationDuration: `${items.length * 4}s` }}
+      >
         {row.map((t, i) => (
           <span
             key={i}
@@ -136,7 +139,38 @@ function Home() {
         </div>
       </div>
       <div className="mt-24">
-        <Marquee items={['CANOPEN', 'STATIC FIRES', 'PID LOOPS', 'ROVS', 'NUCLEAR SUBS', 'GRIFFITH OBSERVATORY', 'FIRST ROBOTICS', 'SWIFTUI']} />
+        <Marquee
+          items={[
+            'CANopen',
+            'EtherCAT',
+            'EtherNet/IP',
+            'Modbus RTU',
+            'RS-485',
+            'JTAG / Boundary Scan',
+            'SPI',
+            'I2C',
+            'Python',
+            'C++',
+            'TypeScript',
+            'React',
+            'MATLAB / Simulink',
+            'Git',
+            'Linux',
+            'Oscilloscopes',
+            'Protocol Analyzers',
+            'Servo Commissioning',
+            'EMC Diagnostics',
+            'Power Electronics',
+            'SolidWorks',
+            'Fusion 360',
+            'FEA',
+            'GD&T',
+            'Servo Control',
+            'Motor Commutation',
+            'Feedback Devices',
+            'PID Tuning',
+          ]}
+        />
       </div>
     </motion.main>
   );
