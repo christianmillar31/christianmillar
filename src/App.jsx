@@ -70,7 +70,7 @@ function Marquee({ items }) {
     <div className="relative overflow-hidden border-y border-white/10 py-6">
       <div
         className="flex gap-16 whitespace-nowrap animate-marquee"
-        style={{ animationDuration: `${items.length * 4}s` }}
+        style={{ animationDuration: `${items.length * 2}s` }}
       >
         {row.map((t, i) => (
           <span
