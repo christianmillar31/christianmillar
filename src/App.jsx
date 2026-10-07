@@ -116,7 +116,7 @@ function Home() {
             // CURRENTLY
           </div>
           <div className="font-display font-black text-xl md:text-2xl uppercase tracking-tight text-ink leading-tight">
-            Electrical Engineer
+            Electromechanical Engineer
           </div>
           <div className="font-mono text-sm text-ink/60 mt-1">
             Advanced Motion Controls · Camarillo, CA · 2025 — Present
@@ -179,7 +179,6 @@ function About() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="font-mono text-xs text-ink/60 mb-8">// CHRISTIAN MILLAR — UCLA ME &rsquo;24 · AMC &rsquo;25</div>
       <div className="grid md:grid-cols-12 gap-12">
         <aside className="md:col-span-5">
           <div className="md:sticky md:top-32">
@@ -195,10 +194,6 @@ function About() {
               <br />
               THAT WORK.
             </h2>
-            <p className="mt-6 font-mono text-sm text-ink/60 max-w-xs">
-              Mechanical engineer. Mostly interested in the hardware/software boundary, motor
-              control, embedded systems, things that move.
-            </p>
           </div>
         </aside>
         <div className="md:col-span-7 space-y-12">
@@ -224,7 +219,6 @@ function About() {
 // -----------------------------------------------------------------------------
 const PROJECTS = [
   {
-    tag: 'Live · draftai.live · 2025 — Present',
     title: 'DraftAI — ML Fantasy Football',
     bullets: [
       'ML projection models (ElasticNet, RidgeCV, XGBoost) trained on 8 seasons of NFL data',
@@ -235,7 +229,6 @@ const PROJECTS = [
     link: { href: 'https://draftai.live', label: 'Visit draftai.live' },
   },
   {
-    tag: 'Built for AMC · 2025 — Present',
     title: 'Agentic Support Chatbot',
     bullets: [
       'RAG pipeline over 372 PDF manuals, datasheets, and application notes',
@@ -246,7 +239,6 @@ const PROJECTS = [
     link: { href: 'https://github.com/christianmillar31/amc-support-chatbot', label: 'View on GitHub' },
   },
   {
-    tag: 'Team Lead · UCLA · 2024 – Present',
     title: 'Autonomous Food Delivery Robot',
     bullets: [
       'Designed and developed the entire autonomous system using SIMULINK and State Flow',
@@ -256,7 +248,6 @@ const PROJECTS = [
     ],
   },
   {
-    tag: 'Personal Project · 2025 – Present',
     title: 'Custom Built RC Submersible',
     bullets: [
       'Designing and fabricating a remotely operated underwater vehicle (ROV)',
@@ -264,14 +255,12 @@ const PROJECTS = [
     ],
   },
   {
-    tag: 'Demo & Report',
     title: 'Food Delivery Robot — Demo',
     embedVideo: 'https://www.youtube.com/embed/EK-CFdtdBk4',
     pdfHref: '/Project%20Delivery%20Report.pdf',
     pdfLabel: 'Project design report (PDF)',
   },
   {
-    tag: 'Live on the App Store · 2025 — Present',
     title: 'SongSmash (iOS App)',
     bullets: [
       'Team music-guessing game: a mystery clip plays, name the song and artist before the reveal',
@@ -282,7 +271,6 @@ const PROJECTS = [
     link: { href: 'https://apps.apple.com/us/app/songsmash/id6801002521', label: 'Get it on the App Store' },
   },
   {
-    tag: 'Lead · UCLA · Summer 2023',
     title: 'Robotic Arm Manipulator',
     bullets: [
       'Designed and developed robotic arms for a 100+ part manipulator',
@@ -291,7 +279,6 @@ const PROJECTS = [
     ],
   },
   {
-    tag: 'Niche engineering interests · Off the clock',
     title: 'Rabbit Holes',
     bullets: [
       'United States nuclear submarines',
@@ -313,7 +300,6 @@ function ProjectCard({ project, index, total }) {
         <span className="font-mono text-xs text-secondary">
           {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
         </span>
-        <span className="font-mono text-xs text-ink/50 text-right max-w-[60%]">{project.tag}</span>
       </div>
       <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink leading-none mb-4">
         {project.title}
@@ -406,16 +392,12 @@ function Resume() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="font-mono text-xs text-ink/60 mb-8">// RESUME / PDF</div>
       <h2
         className="font-display font-black leading-[0.85] tracking-tighter text-ink mb-8"
         style={{ fontSize: 'clamp(72px, 16vw, 260px)' }}
       >
         RESUME<span className="stroke-text">.</span>
       </h2>
-      <p className="font-mono text-sm text-ink/60 max-w-md mb-8">
-        Education, experience, tools. Shorter than this site.
-      </p>
       <a
         href="/ChristianMillarResume2026.pdf"
         download
@@ -461,7 +443,6 @@ function Contact() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="font-mono text-xs text-ink/60 mb-8">// SAY HELLO</div>
       <h2
         className="font-display font-black leading-[0.85] tracking-tighter text-ink mb-16"
         style={{ fontSize: 'clamp(72px, 16vw, 260px)' }}
