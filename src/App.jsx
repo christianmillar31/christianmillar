@@ -112,9 +112,6 @@ function Home() {
           else I can get my hands on. Here&rsquo;s some things I&rsquo;ve done.
         </p>
         <div className="mt-10 border-l-2 border-secondary pl-6 py-2 max-w-2xl">
-          <div className="font-mono text-xs text-secondary mb-2 uppercase tracking-widest">
-            // CURRENTLY
-          </div>
           <div className="font-display font-black text-xl md:text-2xl uppercase tracking-tight text-ink leading-tight">
             Electromechanical Engineer
           </div>
