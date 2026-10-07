@@ -86,6 +86,37 @@ function Marquee({ items }) {
   );
 }
 
+// Resume technical skills, grouped by category.
+const SKILL_GROUPS = [
+  ['CANopen', 'EtherCAT', 'EtherNet/IP', 'Modbus RTU', 'RS-485', 'JTAG / Boundary Scan', 'SPI', 'I2C'],
+  ['Python', 'C++', 'TypeScript', 'React', 'MATLAB / Simulink', 'Git', 'Linux'],
+  ['Oscilloscopes', 'Protocol Analyzers', 'Servo Commissioning', 'EMC Diagnostics', 'Power Electronics'],
+  ['SolidWorks', 'Fusion 360', 'FEA', 'GD&T', 'Servo Control', 'Motor Commutation', 'Feedback Devices', 'PID Tuning'],
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Shuffle within each group, then deal round-robin across groups so that
+// neighbouring words always come from different categories. Re-mixed on each
+// page load.
+function mixSkills(groups) {
+  const queues = shuffle(groups).map(shuffle);
+  const out = [];
+  while (queues.some((q) => q.length)) {
+    for (const q of queues) if (q.length) out.push(q.shift());
+  }
+  return out;
+}
+
+const MARQUEE_ITEMS = mixSkills(SKILL_GROUPS);
+
 // -----------------------------------------------------------------------------
 // Home
 // -----------------------------------------------------------------------------
@@ -136,38 +167,7 @@ function Home() {
         </div>
       </div>
       <div className="mt-24">
-        <Marquee
-          items={[
-            'CANopen',
-            'EtherCAT',
-            'EtherNet/IP',
-            'Modbus RTU',
-            'RS-485',
-            'JTAG / Boundary Scan',
-            'SPI',
-            'I2C',
-            'Python',
-            'C++',
-            'TypeScript',
-            'React',
-            'MATLAB / Simulink',
-            'Git',
-            'Linux',
-            'Oscilloscopes',
-            'Protocol Analyzers',
-            'Servo Commissioning',
-            'EMC Diagnostics',
-            'Power Electronics',
-            'SolidWorks',
-            'Fusion 360',
-            'FEA',
-            'GD&T',
-            'Servo Control',
-            'Motor Commutation',
-            'Feedback Devices',
-            'PID Tuning',
-          ]}
-        />
+        <Marquee items={MARQUEE_ITEMS} />
       </div>
     </motion.main>
   );
