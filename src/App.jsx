@@ -139,7 +139,7 @@ function Home() {
         </div>
       </div>
       <div className="mt-24">
-        <Marquee items={['HARDWARE', 'SPACE', 'ROBOTICS', 'PRODUCT', 'BUILD', 'SHIP']} />
+        <Marquee items={['CANOPEN', 'STATIC FIRES', 'PID LOOPS', 'ROVS', 'NUCLEAR SUBS', 'GRIFFITH OBSERVATORY', 'FIRST ROBOTICS', 'SWIFTUI']} />
       </div>
     </motion.main>
   );
