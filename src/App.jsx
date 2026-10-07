@@ -153,7 +153,7 @@ function About() {
     {
       title: 'Early Inspiration',
       body:
-        "I'm Christian. UCLA mechanical engineering, class of '24. Now I'm an electrical engineer at Advanced Motion Controls in Camarillo. Grew up in Thousand Oaks watching Star Trek with my dad. My grandfather ran a machine shop in Chatsworth; my uncle built satellites and fighter jets. Enough hours staring up at my heroes and the ceiling of the Griffith Planetarium, I figured I could chart my own path too.",
+        "I'm Christian. UCLA mechanical engineering, class of '24. Now I'm an electromechanical engineer at Advanced Motion Controls in Camarillo. Grew up in Thousand Oaks watching Star Trek with my dad. My grandfather ran a machine shop in Chatsworth; my uncle built satellites and fighter jets. Enough hours staring up at my heroes and the ceiling of the Griffith Planetarium, I figured I could chart my own path too.",
     },
     {
       title: 'The Pivot',
