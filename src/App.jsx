@@ -248,6 +248,7 @@ function About() {
 const PROJECTS = [
   {
     title: 'DraftAI — ML Fantasy Football',
+    group: 'side',
     bullets: [
       'ML projection models (ElasticNet, RidgeCV, XGBoost) trained on 8 seasons of NFL data',
       '128 unique league configurations ranked via Value-Based Drafting',
@@ -258,6 +259,7 @@ const PROJECTS = [
   },
   {
     title: 'Agentic Support Chatbot',
+    group: 'work',
     bullets: [
       'RAG pipeline over 372 PDF manuals, datasheets, and application notes',
       'Claude AI backend with semantic search for support engineers',
@@ -268,6 +270,7 @@ const PROJECTS = [
   },
   {
     title: 'Autonomous Food Delivery Robot',
+    group: 'ucla',
     bullets: [
       'Designed and developed the entire autonomous system using SIMULINK and State Flow',
       'Integrated IR sensors, servo motors, PID controllers, and ultrasonic sensing',
@@ -276,20 +279,8 @@ const PROJECTS = [
     ],
   },
   {
-    title: 'Custom Built RC Submersible',
-    bullets: [
-      'Designing and fabricating a remotely operated underwater vehicle (ROV)',
-      'Arduino-based electronics, IR remote, custom propulsion, buoyancy control',
-    ],
-  },
-  {
-    title: 'Food Delivery Robot — Demo',
-    embedVideo: 'https://www.youtube.com/embed/EK-CFdtdBk4',
-    pdfHref: '/Project%20Delivery%20Report.pdf',
-    pdfLabel: 'Project design report (PDF)',
-  },
-  {
     title: 'SongSmash (iOS App)',
+    group: 'side',
     bullets: [
       'Team music-guessing game: a mystery clip plays, name the song and artist before the reveal',
       'SwiftUI; 30-second previews from the Apple Music catalog, no account or subscription needed',
@@ -299,7 +290,23 @@ const PROJECTS = [
     link: { href: 'https://apps.apple.com/us/app/songsmash/id6801002521', label: 'Get it on the App Store' },
   },
   {
+    title: 'Custom Built RC Submersible',
+    group: 'side',
+    bullets: [
+      'Designing and fabricating a remotely operated underwater vehicle (ROV)',
+      'Arduino-based electronics, IR remote, custom propulsion, buoyancy control',
+    ],
+  },
+  {
+    title: 'Food Delivery Robot — Demo',
+    group: 'ucla',
+    embedVideo: 'https://www.youtube.com/embed/EK-CFdtdBk4',
+    pdfHref: '/Project%20Delivery%20Report.pdf',
+    pdfLabel: 'Project design report (PDF)',
+  },
+  {
     title: 'Robotic Arm Manipulator',
+    group: 'ucla',
     bullets: [
       'Designed and developed robotic arms for a 100+ part manipulator',
       'Calculated torque and stress for safe, reliable movement',
@@ -308,6 +315,7 @@ const PROJECTS = [
   },
   {
     title: 'Rabbit Holes',
+    group: 'side',
     bullets: [
       'United States nuclear submarines',
       'The Griffith Observatory and astronomy',
@@ -316,6 +324,14 @@ const PROJECTS = [
     ],
   },
 ];
+
+// Display order on the Work page. Cards are numbered continuously across groups.
+const PROJECT_GROUPS = [
+  { key: 'work', title: 'Day Job' },
+  { key: 'side', title: 'On the Side' },
+  { key: 'ucla', title: 'UCLA' },
+];
+const ORDERED_PROJECTS = PROJECT_GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g.key));
 
 function ProjectCard({ project, index, total }) {
   return (
@@ -399,11 +415,29 @@ function Projects() {
           <span className="stroke-text">WORK.</span>
         </h2>
       </div>
-      <div className="grid md:grid-cols-2 gap-6">
-        {PROJECTS.map((p, i) => (
-          <ProjectCard key={p.title} project={p} index={i} total={PROJECTS.length} />
-        ))}
-      </div>
+      {PROJECT_GROUPS.map((g) => {
+        const items = ORDERED_PROJECTS.filter((p) => p.group === g.key);
+        return (
+          <div key={g.key} className="mb-20 last:mb-0">
+            <div className="flex items-center gap-6 mb-8">
+              <h3 className="font-display font-black text-3xl md:text-4xl uppercase tracking-tight text-ink">
+                {g.title}
+              </h3>
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {items.map((p) => (
+                <ProjectCard
+                  key={p.title}
+                  project={p}
+                  index={ORDERED_PROJECTS.indexOf(p)}
+                  total={ORDERED_PROJECTS.length}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </motion.section>
   );
 }
