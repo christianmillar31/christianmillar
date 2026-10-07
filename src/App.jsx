@@ -247,7 +247,7 @@ function About() {
 // -----------------------------------------------------------------------------
 const PROJECTS = [
   {
-    title: 'DraftAI — ML Fantasy Football',
+    title: 'DraftAI (ML Fantasy Football)',
     group: 'side',
     bullets: [
       'ML projection models (ElasticNet, RidgeCV, XGBoost) trained on 8 seasons of NFL data',
@@ -256,17 +256,6 @@ const PROJECTS = [
       'Live draft board, mock draft simulator, trade analyzer, auction values',
     ],
     link: { href: 'https://draftai.live', label: 'Visit draftai.live' },
-  },
-  {
-    title: 'Agentic Support Chatbot',
-    group: 'work',
-    bullets: [
-      'RAG pipeline over 372 PDF manuals, datasheets, and application notes',
-      'Claude AI backend with semantic search for support engineers',
-      'Python + Docker, deployed on Hugging Face Spaces',
-      'Built for internal use at Advanced Motion Controls',
-    ],
-    link: { href: 'https://github.com/christianmillar31/amc-support-chatbot', label: 'View on GitHub' },
   },
   {
     title: 'Autonomous Food Delivery Robot',
@@ -290,6 +279,17 @@ const PROJECTS = [
     link: { href: 'https://apps.apple.com/us/app/songsmash/id6801002521', label: 'Get it on the App Store' },
   },
   {
+    title: 'Agentic Support Chatbot',
+    group: 'side',
+    bullets: [
+      'RAG pipeline over 372 PDF manuals, datasheets, and application notes',
+      'Claude AI backend with semantic search for support engineers',
+      'Python + Docker, deployed on Hugging Face Spaces',
+      'Built for internal use at Advanced Motion Controls',
+    ],
+    link: { href: 'https://github.com/christianmillar31/amc-support-chatbot', label: 'View on GitHub' },
+  },
+  {
     title: 'Custom Built RC Submersible',
     group: 'side',
     bullets: [
@@ -298,7 +298,7 @@ const PROJECTS = [
     ],
   },
   {
-    title: 'Food Delivery Robot — Demo',
+    title: 'Food Delivery Robot (Demo)',
     group: 'ucla',
     embedVideo: 'https://www.youtube.com/embed/EK-CFdtdBk4',
     pdfHref: '/Project%20Delivery%20Report.pdf',
@@ -327,8 +327,7 @@ const PROJECTS = [
 
 // Display order on the Work page. Cards are numbered continuously across groups.
 const PROJECT_GROUPS = [
-  { key: 'work', title: 'Day Job' },
-  { key: 'side', title: 'On the Side' },
+  { key: 'side', title: 'Side Projects' },
   { key: 'ucla', title: 'UCLA' },
 ];
 const ORDERED_PROJECTS = PROJECT_GROUPS.flatMap((g) => PROJECTS.filter((p) => p.group === g.key));
@@ -495,7 +494,6 @@ function Contact() {
     { label: 'EMAIL', value: 'christianmillar31@gmail.com', href: 'mailto:christianmillar31@gmail.com' },
     { label: 'PHONE', value: '(805) 807-7790', href: 'tel:8058077790' },
     { label: 'LOCATION', value: 'Thousand Oaks, CA · Los Angeles, CA' },
-    { label: 'GITHUB', value: '@christianmillar31', href: 'https://github.com/christianmillar31' },
   ];
   return (
     <motion.section
